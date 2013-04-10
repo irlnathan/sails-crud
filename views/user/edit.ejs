@@ -1,0 +1,10 @@
+<h1> Editing User </h1>
+<form action="/user/update/<%= user.id %>" method="POST">
+
+	<div>Name: <input value="<%= user.name %>" name="name" type="text"/></div>
+	<div>Email Address: <input value="<%= user.email %>" name="email" type="text"/></div>
+	<input type="submit"/>
+</form>
+
+<a href="/user/edit/<%= user.id %>">Edit</a> | 
+<a href="/user">Back</a>
