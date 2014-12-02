@@ -22,6 +22,7 @@ lib-cov
 pids
 logs
 results
+node_modules
 
 npm-debug.log
 
@@ -35,6 +36,7 @@ npm-debug.log
 .netbeans
 nbproject
 .idea
+*.iml
 
 
 ########################

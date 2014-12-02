@@ -4,16 +4,16 @@
 ---------------------*/
 var UserController = {
 
-index: function (req, res) {
+    index: function (req, res) {
 
-	User.findAll(function(err, users){
-		if (err) return res.send(err, 500);
+        User.find().exec(function(err, users){
+            if (err) return res.send(err, 500);
 
-		res.view({
-			model: users
-		});
-	});
-},
+            res.view({
+                model: users
+            });
+        });
+    },
 
 	'new': function(req,res) {
 		res.view();
@@ -36,8 +36,10 @@ index: function (req, res) {
 
   	if (!id) return res.send("No id specified.", 500);
 
+      console.log(id)
 
-  	User.find(id, function userFound(err, user) {
+  	User.findOne(id).exec(function userFound(err, user) {
+        console.log(user)
   		if(err) return res.sender(err,500);
   		if(!user) return res.send("User "+id+" not found", 404);
 
@@ -52,7 +54,7 @@ index: function (req, res) {
     
     if (!id) return res.send("No id specified.",500);
 
-    User.find(id, function userFound (err,user){
+    User.findOne(id).exec( function userFound (err,user){
       if (err) return res.send(err,500);
       if (!user) return res.send("User "+id+" not found.",404);
 
@@ -70,7 +72,7 @@ index: function (req, res) {
     
     if (!id) return res.send("No id specified.",500);
 
-    User.update(id, params, function userUpdated(err, updatedUser) {
+    User.update(id, params).exec( function userUpdated(err, updatedUser) {
       if (err) {
         res.redirect('/user/edit');
       }
@@ -86,11 +88,11 @@ index: function (req, res) {
 		var id = req.param('id');
 		if (!id) return res.send("No id specified.",500);
 
-		User.find(id, function foundUser(err, user) {
+		User.find(id).exec( function foundUser(err, user) {
 			if (err) return res.send(err,500);
 			if (!user) return res.send("No user with that idid exists.",404);
 
-			User.destroy(id, function userDestroyed(err) {
+			User.destroy(id).exec( function userDestroyed(err) {
 				if (err) return res.send(err,500);
 
 				return res.redirect('/user');
