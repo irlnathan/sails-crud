@@ -32,14 +32,11 @@ var UserController = {
 
   show: function (req,res) {
   	
-  	var id = req.param('id')
+  	var id = req.param('id');
 
   	if (!id) return res.send("No id specified.", 500);
 
-      console.log(id)
-
   	User.findOne(id).exec(function userFound(err, user) {
-        console.log(user)
   		if(err) return res.sender(err,500);
   		if(!user) return res.send("User "+id+" not found", 404);
 
